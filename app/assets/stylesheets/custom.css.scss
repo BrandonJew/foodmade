@@ -1,0 +1,190 @@
+$navbar-default-bg: rgba(144,238,144,0.9);
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
+section {
+  overflow: auto;
+}
+
+body {
+	background-image: image-url('background.jpg');
+	background-size: 100%;
+	padding-top: 60px;	
+}
+
+/* header */
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    background-color:  rgba(172,242,172,0.9);
+
+}
+
+.navbar-default .navbar-nav > li > a:active, .navbar-default .navbar-nav > li > a:focus {
+    background-color:  rgba(172,242,172,0.9);
+
+}
+
+.nav-tabs {
+    background-color: none;
+    margin-bottom: 0;
+    border-bottom: 0px;
+  
+}
+.nav-tabs > li > a{
+  background-color: rgba(255,255,255,0.9);
+  border: medium none;
+}
+.nav-tabs > li > a:hover{
+  background-color: rgba(255,255,255,0.9);
+  color: #000000;
+  border: medium none;
+}
+
+/* Content */
+
+#logo
+{
+	float: left;
+	margin-right: 10px;
+	font-size: 1.7em;
+	color: #fff;
+	letter-spacing: -1px;
+	padding-top:15px;
+	font-weight: bold;
+}
+
+#logo:hover {
+	color: #fff;
+	text-decoration: none;
+	background-color: rgba(144,238,144,0.9);
+}
+
+#logo:active {
+	color: #fff;
+	text-decoration: none;
+	background-color: rgba(144,238,144,0.9);
+}
+
+.tab-content {
+    padding: 0px;
+}
+.signupcenter {
+position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+ 
+    width:80%;
+	
+}
+.logincenter {
+position:absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+ 
+    width:60%;
+}
+
+.center {
+  text-align: center;
+}
+
+.homejumbotron {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.transparent{
+    background: rgba(238,238,238,0.9);
+  }
+
+/* footer */
+
+footer {
+    position: absolute;
+  top: 95%;
+  left: 50%;
+  transform: translate(-50%, -5%);
+}
+
+footer a {
+  color: #555;
+}
+
+footer a:hover {
+  color: #222;
+}
+
+footer small {
+  float: left;
+}
+
+footer ul {
+  float: right;
+  list-style: none;
+}
+
+footer ul li {
+  float: left;
+  margin-left: 15px;
+}
+
+/* misc */
+
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+     position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -10%);
+  @include box_sizing;
+}
+
+/* forms */
+
+.exploreoffset {
+margin-bottom: 15px
+}
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+.form-control{
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+.checkbox {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  span {
+    margin-left: 20px;
+    font-weight: normal;
+  }
+}
+
+#session_remember_me {
+  width: auto;
+  margin-left: 0;
+}
+/* Rails scaffold style compatibility */
+

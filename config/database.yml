@@ -1,0 +1,30 @@
+development:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: foodmade_development
+  pool: 5
+  username: root
+  password: foodmade3.14159
+  socket:
+
+test:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: foodmade_test
+  pool: 5
+  username: root
+  password: foodmade3.14159
+  socket: 
+
+production:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: foodmade_production
+  pool: 5
+  username: root
+  password: foodmade3.14159
+  socket:
+

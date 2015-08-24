@@ -1,0 +1,67 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+<section class = "homejumbotron">
+<div class="container">
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Welcome</a></li>
+    <li><a data-toggle="tab" href="#menu1">About</a></li>
+
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+
+
+	<div class = "jumbotron transparent center">
+		<h1>Welcome to <strong>FoodMade</strong></h1>
+		<%= link_to "Made for You", '#', class: "btn btn-lg btn-warning" %>
+		&nbsp
+	
+		<%= link_to "Made by You", '#', class: "btn btn-lg btn-warning" %>
+	<br>
+	<br>
+	</div>
+
+
+
+    </div>
+    <div id="menu1" class="tab-pane fade">
+
+
+	<div class = "jumbotron transparent">
+		<h2><strong>What is FoodMade?</strong></h2>
+		<p><strong>FoodMade</strong> is your platform for exploring a vast world of exciting culinary experiences, giving you the opportunity to discover and share unique foods and culture. </p>
+	<br>
+	<center>
+  <form class="form-inline" role="form">
+    <div class="form-group">
+      <label class="sr-only" for="zipcode">Zipcode:</label>
+      <input type="zipcode" class="form-control" id="zipcode" placeholder="Enter zipcode">
+    </div>
+
+    <button type="submit" class="btn btn-default exploreoffset">Explore</button>
+  </form>
+	</div>
+	
+	</center>
+
+    </div>
+
+  </div>
+</div>
+</section
+</body>
+</html>
+
+</section>
+

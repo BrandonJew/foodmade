@@ -1,0 +1,4 @@
+billy
+	name: Billy Ball
+	email: billyball@airmail.cc
+	password_digest: <%= User.digest('password') %>
