@@ -5,7 +5,7 @@ development:
   database: foodmade_development
   pool: 5
   username: root
-  password: hunter2
+  password: foodmade3.14159
   socket:
 
 test:
@@ -15,7 +15,7 @@ test:
   database: foodmade_test
   pool: 5
   username: root
-  password: hunter2
+  password: foodmade3.14159
   socket: 
 
 production:
@@ -25,6 +25,6 @@ production:
   database: foodmade_production
   pool: 5
   username: root
-  password: hunter2
+  password: foodmade3.14159
   socket:
 
