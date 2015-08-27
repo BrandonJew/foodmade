@@ -1,0 +1,31 @@
+
+<% provide(:title, 'Coming Soon') %>
+
+<div class = "well  transparent signupcenter">
+<h1><center><strong>Sign up for our newsletter!</strong></center></h1>
+<h5><center><strong>We'll keep you updated with all the latest news until deployment on September 12th</center></h5></strong>
+<br>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+       <%= form_for(@recipient) do |f| %>
+      <%= render 'shared/newsletter_error' %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+
+      <%= f.label :email %>
+      <%= f.email_field :email, class: 'form-control' %>
+
+      <%= f.label :zipcode %>
+      <%= f.text_field :zipcode, class: 'form-control' %>
+
+<br>
+
+      <%= f.submit "Done!", class: "btn btn-warning" %>
+    <% end %>
+	<br>
+	<br>
+  </div>
+</div>
+</div>

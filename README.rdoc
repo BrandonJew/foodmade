@@ -4,4 +4,9 @@ FoodMade Development.
 Ruby 2.1.5
 Rails 4.2.3
 
+Newsletter mode: 
+*Commented out navigation in header file.
+*Changed and commented out homepage descriptions.
+*Disabled user functionality (commented out everything in routes.rb) and user profiles (commented entire view).
+
 

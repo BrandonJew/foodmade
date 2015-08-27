@@ -24,10 +24,11 @@
 
 	<div class = "jumbotron transparent center">
 		<h1>Welcome to <strong>FoodMade</strong></h1>
-		<%= link_to "Made for You", '#', class: "btn btn-lg btn-warning" %>
-		&nbsp
+		
+		<center><div class="well-sm orangewell"><h4>Made for You | Made by You</h4></div></center>
+		<!---&nbsp
 	
-		<%= link_to "Made by You", '#', class: "btn btn-lg btn-warning" %>
+		<%= link_to "Made by You", '#', class: "btn btn-lg btn-warning" %>--->
 	<br>
 	<br>
 	</div>
@@ -40,10 +41,10 @@
 
 	<div class = "jumbotron transparent">
 		<h2><strong>What is FoodMade?</strong></h2>
-		<p><strong>FoodMade</strong> is your platform for exploring a vast world of exciting culinary experiences, giving you the opportunity to discover and share unique foods and culture. </p>
-	<br>
+		<p class = "big"><strong>FoodMade</strong> is your platform for exploring a vast world of exciting culinary experiences, giving you the opportunity to discover and share unique foods and cultures. We will be officially launching on September 12th. Sign up for our newsletter to stay up to date! </p>
+	
 	<center>
-  <form class="form-inline" role="form">
+  <!---<form class="form-inline" role="form">
     <div class="form-group">
       <label class="sr-only" for="zipcode">Zipcode:</label>
       <input type="zipcode" class="form-control" id="zipcode" placeholder="Enter zipcode">
@@ -51,7 +52,8 @@
 
     <button type="submit" class="btn btn-default exploreoffset">Explore</button>
   </form>
-	</div>
+	</div>--->
+		<%= link_to "Sign up!", 'newsletter', class: "btn btn-lg btn-warning" %>
 	
 	</center>
 
