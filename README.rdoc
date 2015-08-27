@@ -5,8 +5,9 @@ Ruby 2.1.5
 Rails 4.2.3
 
 Newsletter mode: 
-*Commented out navigation in header file.
+*Removed navigation in header file (functional nav bar saved as text file header.txt).
 *Changed and commented out homepage descriptions.
-*Disabled user functionality (commented out everything in routes.rb) and user profiles (commented entire view).
+*Disabled user functionality (commented out everything in routes.rb).
+*index made into text file
 
 
