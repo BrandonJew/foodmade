@@ -19,4 +19,14 @@ class UserMailer < ApplicationMailer
     @user = user
     mail to: user.email, subject: "Password reset"
   end
+
+  def chef_confirmation(user)
+    @user = user
+    mail to: user.email, subject: "Congratulations, you are a FoodMade Chef!"
+  end
+
+  def chef_notification(user)
+    @user = user
+    mail to: user.email, subject: "You are no longer a FoodMade Chef."
+  end
 end

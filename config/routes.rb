@@ -17,6 +17,14 @@ Rails.application.routes.draw do
   resources :recipients
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
+  resources :users do
+    member do
+      get 'chefStatus'
+      put 'chefStatus'
+    end
+  end
+match "users/:id/chefStatus" => "users#chefStatus", :via => [:get], :as => 'users_chefStatus'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

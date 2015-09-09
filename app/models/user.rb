@@ -40,6 +40,26 @@ class User < ActiveRecord::Base
     update_attribute(:remember_digest, nil)
   end
 
+  # Add Chef Status.
+  def makeChef
+    update_attribute(:chef,    true)
+  end
+
+  # Remove Chef Status
+  def removeChef
+    update_attribute(:chef,    false)
+  end
+
+  # Send Chef confirmation email
+  def send_chef_confirmation_email
+    UserMailer.chef_confirmation(@user).deliver_now
+  end
+
+  # Send Chef notification of dismissal!
+  def send_chef_notification_email
+    UserMailer.chef_notification(@user).deliver_now
+  end
+
   # Activates an account.
   def activate
     update_attribute(:activated,    true)

@@ -1,8 +1,33 @@
+<% if current_user.admin? %>
 <li>
+<% if user.activated? && !user.admin?%>
   <%= gravatar_for user %>
   <%= link_to user.name, user %>
-  <% if current_user.admin? && !current_user?(user) %>
+  <% if !current_user?(user) %>
     | <%= link_to "delete", user, method: :delete,
                                   data: { confirm: "You sure?" } %>
+    <% if user.chef? %>
+    CHEF <%= link_to "Dismiss chef", :controller => "users", :id => user.id, :action => "chefStatus", :method => :put, :chef => false %>
+    <% else %>
+    NOT CHEF <%= link_to "Make chef", :controller => "users", :id => user.id, :action => "chefStatus", :method => :put, :chef => true %>
+    <% end %>
   <% end %>
+<% elsif !user.admin? %>
+  <%= link_to user.name, user %>
+  | not activated
+<% end %>
 </li>
+<% else %>
+<li>
+<% if user.activated?  %>
+  <%= gravatar_for user %>
+  <%= link_to user.name, user %>
+
+  <% if user.chef? %>
+    CHEF
+  <% end %>
+<% end %>
+</li>
+<% end %>
+
+

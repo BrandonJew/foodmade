@@ -48,7 +48,20 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
-
+  def chefStatus
+    @user = User.find(params[:id])
+    if !@user.chef?
+      @user.update_attribute(:chef,    true)
+      flash[:success] = "#{@user.name} is now a chef! Notification email has been sent to #{@user.email}!" 
+      UserMailer.chef_confirmation(@user).deliver_now
+      redirect_to "/users?approved=true"
+    else 
+      @user.update_attribute(:chef,    false)
+      flash[:danger] = "#{@user.name} is no longer a chef. Notification email has been sent to #{@user.email}!"
+      UserMailer.chef_notification(@user).deliver_now
+      redirect_to "/users?approved=false"
+    end
+  end
 
   # DELETE /users/1
   # DELETE /users/1.json
@@ -58,6 +71,9 @@ class UsersController < ApplicationController
     redirect_to users_url
     end
   end
+
+
+
 
   private
     def user_params
@@ -87,4 +103,7 @@ end
     def admin_user
       redirect_to(root_url) unless current_user.admin?
     end
+
+
+        
 

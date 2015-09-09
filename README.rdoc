@@ -4,10 +4,6 @@ FoodMade Development.
 Ruby 2.1.5
 Rails 4.2.3
 
-Newsletter mode: 
-*Removed navigation in header file (functional nav bar saved as text file header.txt).
-*Changed and commented out homepage descriptions.
-*Disabled user functionality (commented out everything in routes.rb).
-*index made into text file
+*Finished chef status system
 
 

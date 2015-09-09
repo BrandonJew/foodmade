@@ -1,0 +1,2 @@
+module ChefMakerHelper
+end
