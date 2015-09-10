@@ -1,0 +1,15 @@
+
+<% provide(:title, "Home") %>
+
+
+<% if logged_in? %>
+  <div class ="well gray" >
+  <p> Hello <%= current_user.name %></p>
+  </div>
+<% else %>
+  <% flash[:danger] = "Please log in." %>
+    <script type="text/javascript">
+    window.location.href="/login"  // put your correct path in a string here
+  </script>
+<% end %>
+

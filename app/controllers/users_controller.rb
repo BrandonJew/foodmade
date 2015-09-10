@@ -48,6 +48,19 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
+  def activationStatus
+    @user = User.find(params[:id])
+    if !@user.activated?
+      @user.activate
+      flash[:success] = "#{@user.name} is now activated!" 
+      redirect_to "/users?approved=true"
+    else 
+      @user.deactivate
+      flash[:danger] = "#{@user.name} has been deactivated. Notification email has been sent to #{@user.email}!"
+      @user.send_deactivation_email
+      redirect_to "/users?approved=false"
+    end
+  end
   def chefStatus
     @user = User.find(params[:id])
     if !@user.chef?

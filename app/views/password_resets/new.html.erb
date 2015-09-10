@@ -1,6 +1,7 @@
 <% provide(:title, "Forgot password") %>
+<body class = "homepage">
 <div class = "well  transparent logincenter">
-<h1>Forgot password</h1>
+<h1><center><strong>Forgot password</strong></center></h1>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
@@ -8,8 +9,10 @@
       <%= f.label :email %>
       <%= f.email_field :email, class: 'form-control' %>
 
-      <%= f.submit "Submit", class: "btn btn-primary" %>
+      <%= f.submit "Submit", class: "btn btn-warning" %>
     <% end %>
+	<br>
   </div>
 </div>
 </div>
+</body>

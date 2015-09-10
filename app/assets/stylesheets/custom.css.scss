@@ -1,4 +1,4 @@
-$navbar-default-bg: rgba(144,238,144,0.9);
+$navbar-default-bg: rgba(144,238,144,1.0);
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
@@ -11,12 +11,14 @@ $navbar-default-bg: rgba(144,238,144,0.9);
 section {
   overflow: auto;
 }
-
-body {
-	background-image: image-url('background.jpg');
-	background-size: 100%;
-	padding-top: 60px;	
+#layout {
+    width:1125px;
+    margin: auto;
+    padding:20px;
+    background-color:#fff;	 	 
 }
+
+
 
 /* header */
 
@@ -105,6 +107,10 @@ position:absolute;
 .transparent{
     background: rgba(238,238,238,0.9);
   }
+
+.gray{
+    background: #F9F9F9;
+}
 
 .orangewell {
   background-color: #f0ad4e;

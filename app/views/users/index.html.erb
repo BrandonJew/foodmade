@@ -1,14 +1,60 @@
 <% provide(:title, 'All users') %>
 
-<div class = "jumbotron" >
+<div class = "well gray" >
+
 <h1>Users</h1>
 <%= will_paginate %>
 <ul class="users">
-
-    <li>
-      <%= render @users %>
-    </li>
-
+<% if current_user.admin? %>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>User Info</th>
+          <th>Admin Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+        <% if !user.admin? %>
+          <tr>
+            <td>
+              <%= gravatar_for user %>
+              <%= link_to user.name, user %>
+              <% if !user.activated? %>
+                <strong><mark>NOT ACTIVATED</mark></strong>
+              <% end %>
+              <% if user.chef? %>
+	        <strong><mark>CHEF</mark></strong>
+              <% end %>
+            </td>
+            <td>
+              <% if !current_user?(user) %> 
+                <% if user.chef? %>
+                  <%= link_to "Dismiss chef", {:controller => "users", :id => user.id, :action => "chefStatus"}, {:method => :put, :chef => false,
+data: { confirm: "REMOVE chef status from #{user.name}?" }, class: "btn btn-sm btn-info"} %>
+                <% else %> 
+                  <%= link_to "Make chef", {:controller => "users", :id => user.id, :action => "chefStatus"}, {:method => :put, :chef => true,
+data: { confirm: "ADD chef status to #{user.name}?" }, class: "btn btn-sm btn-info"} %>
+                <% end %>
+		<% if user.activated? %>
+			<%= link_to "Deactivate", {:controller => "users", :id => user.id, :action => "activationStatus"}, {:method => :put, :activated => false,
+data: { confirm: "DEACTIVATE #{user.name}?" }, class: "btn btn-sm btn-warning"} %>
+		<% else %>
+			<%= link_to "Activate", {:controller => "users", :id => user.id, :action => "activationStatus"}, {:method => :put, :activated => true,
+data: { confirm: "ACTIVATE #{user.name}?" }, class: "btn btn-sm btn-warning"} %>
+		<% end %>
+                <%= link_to "delete", user, method: :delete,
+                                  data: { confirm: "Delete #{user.name}?" }, class: "btn btn-sm btn-danger" %>
+               <% end %>
+             </td>
+           </tr>
+         <% end %>
+         <% end %>
+       </tbody>
+     </table>
+<% else %>
+  <%= render @users %>
+<% end %>
 </ul>
 <%= will_paginate %>
 </div>

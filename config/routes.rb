@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'sessions/new'
 
   root 'static_pages#home'
+  get  'dashboard' => 'static_pages#dashboard'
   get 'newsletter' => 'recipients#new'
   get 'signup' => 'users#new'
   get    'login'   => 'sessions#new'
@@ -21,9 +22,12 @@ Rails.application.routes.draw do
     member do
       get 'chefStatus'
       put 'chefStatus'
+      get 'activationStatus'
+      put 'activationStatus'
     end
   end
 match "users/:id/chefStatus" => "users#chefStatus", :via => [:get], :as => 'users_chefStatus'
+match "users/:id/activationStatus" => "users#activationStatus", :via => [:get], :as => 'users_activationStatus'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
