@@ -1,7 +1,11 @@
 <% provide(:title, "Forgot password") %>
 <body class = "homepage">
 <div class = "well  transparent logincenter">
+<% if logged_in? %>
+<h1><center><strong>Reset password</strong></center></h1>
+<% else %>
 <h1><center><strong>Forgot password</strong></center></h1>
+<% end %>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
