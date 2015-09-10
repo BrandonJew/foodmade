@@ -3,7 +3,7 @@
 
 <div class = "well gray signupcenter">
 <h1><center><strong>Update Profile</strong></center></h1>
-
+<center><%= image_tag @user.avatar (:thumb) %></center>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <%= form_for(@user) do |f| %>
@@ -14,7 +14,17 @@
 
       <%= f.label :email %>
       <%= f.email_field :email, class: 'form-control' %>
-
+      <%= f.label :avatar %>
+      <%= f.file_field :avatar %>
+        <center>
+    <div class="col-sm-offset-2 col-sm-7 ">
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :remove_avatar %> Remove Avatar
+	</label>
+      </div>
+    </div>
+  </center>
      <!--- <%= f.label :password %>
       <%= f.password_field :password, class: 'form-control' %>
 
@@ -26,11 +36,7 @@
     <% end %>
 	<%= link_to "Reset Password", new_password_reset_path %>
 	<br>
-	<center>    <div class="gravatar_edit">
-      <%= gravatar_for @user %>
-      <a href="http://gravatar.com/emails" target="_blank">Change</a>
-    </div></center
-	<br>
+
 	<br>
   </div>
 </div>

@@ -18,7 +18,7 @@
         <% if !user.admin? %>
           <tr>
             <td>
-              <%= gravatar_for user %>
+              <%= image_tag user.avatar(:thumb) %>
               <%= link_to user.name, user %>
               <% if !user.activated? %>
                 <strong><mark>NOT ACTIVATED</mark></strong>

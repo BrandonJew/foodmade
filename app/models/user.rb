@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
-  attr_accessor :remember_token, :activation_token, :reset_token
-  before_save   :downcase_email
+  attr_accessor :remember_token, :activation_token, :reset_token, :remove_avatar
+  before_save   :downcase_email, :delete_avatar, if: ->{ remove_avatar == '1' && !avatar_updated_at_changed? }
   before_create :create_activation_digest
   validates :name,  presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -9,7 +9,11 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
-
+  has_attached_file :avatar,  :styles => {
+      :thumb => "100x100#",
+      :small  => "150x150>",
+      :medium => "200x200" }, default_url: "Default_:style.png"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
   # Returns the hash digest of the given string.
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
@@ -95,6 +99,7 @@ class User < ActiveRecord::Base
   def password_reset_expired?
     reset_sent_at < 2.hours.ago
   end
+  
 
 
 private
@@ -107,5 +112,9 @@ private
     def create_activation_digest
       self.activation_token  = User.new_token
       self.activation_digest = User.digest(activation_token)
+    end
+    # Removes avatar
+    def delete_avatar
+      self.avatar = nil
     end
 end
