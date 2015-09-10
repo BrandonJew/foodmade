@@ -3,7 +3,11 @@
 FoodMade Development.
 Ruby 2.1.5
 Rails 4.2.3
-
+*Added admin capabilities for making users chef, removing users, or deactivating users.
+*Emailer set up for verification and notifications
 *Finished chef status system
+*Added avatar system using paperclip.
+*Dashboard begun
+
 *Install imagemagick for avatars!
 
