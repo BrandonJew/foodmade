@@ -29,6 +29,7 @@ Rails.application.routes.draw do
 match "users/:id/chefStatus" => "users#chefStatus", :via => [:get], :as => 'users_chefStatus'
 match "users/:id/activationStatus" => "users#activationStatus", :via => [:get], :as => 'users_activationStatus'
 
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

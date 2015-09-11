@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150910062805) do
+ActiveRecord::Schema.define(version: 20150910204343) do
 
   create_table "recipients", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -41,8 +41,12 @@ ActiveRecord::Schema.define(version: 20150910062805) do
     t.string   "avatar_content_type", limit: 255
     t.integer  "avatar_file_size",    limit: 4
     t.datetime "avatar_updated_at"
+    t.string   "zipcode",             limit: 255
+    t.float    "lat",                 limit: 24
+    t.float    "lng",                 limit: 24
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["lat", "lng"], name: "index_users_on_lat_and_lng", using: :btree
 
 end

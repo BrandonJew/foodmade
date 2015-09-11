@@ -14,6 +14,15 @@ class User < ActiveRecord::Base
       :small  => "150x150>",
       :medium => "200x200" }, default_url: "Default_:style.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+  VALID_ZIPCODE_REGEX = /(^\d{5}$)|(^\d{5}-\d{4}$)/
+  validates :zipcode, presence: true, length: { maximum: 10 },
+		    format: { with: VALID_ZIPCODE_REGEX }
+  acts_as_mappable :default_units => :miles,
+                   :default_formula => :sphere,
+                   :distance_field_name => :distance,
+                   :lat_column_name => :lat,
+                   :lng_column_name => :lng
+             	
   # Returns the hash digest of the given string.
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
@@ -24,6 +33,14 @@ class User < ActiveRecord::Base
   # Returns a random token.
   def User.new_token
     SecureRandom.urlsafe_base64
+  end
+  #add lat and lng to users, have zipcode translated and stored
+  def store_location
+    loc = Geokit::Geocoders::GoogleGeocoder.geocode "#{self.zipcode}"
+    if loc.success
+      update_attribute(:lat, loc.lat)
+      update_attribute(:lng, loc.lng)
+    end
   end
 
   # Remembers a user in the database for use in persistent sessions.

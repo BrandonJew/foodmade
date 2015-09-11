@@ -2,8 +2,9 @@
 
 <div class = "well gray" >
 
-<h1>Users</h1>
-<%= will_paginate %>
+<h1>Chefs nearby</h1>
+
+
 <ul class="users">
 <% if current_user.admin? %>
     <table class="table table-hover">
@@ -56,5 +57,5 @@ data: { confirm: "ACTIVATE #{user.name}?" }, class: "btn btn-sm btn-warning"} %>
   <%= render @users %>
 <% end %>
 </ul>
-<%= will_paginate %>
+
 </div>

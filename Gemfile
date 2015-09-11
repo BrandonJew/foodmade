@@ -8,6 +8,7 @@ gem 'bootstrap-will_paginate', '0.0.10'
 gem 'bcrypt', '~> 3.1.10'
 gem 'bootstrap-sass', '3.3.5'
 gem "paperclip", "~> 4.3"
+gem 'geokit-rails', github: 'geokit/geokit-rails'
 gem 'mysql2'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'

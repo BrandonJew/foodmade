@@ -5,6 +5,13 @@
 <% if logged_in? %>
   <div class ="well gray" >
   <p> Hello <%= current_user.name %></p>
+
+<%= form_tag users_path, :method => 'get', :class => "navbar-form" do %>
+    <%= text_field_tag :zip, params[:search], :class => "form-control", :value => "#{current_user.zipcode}" %>
+    <%= submit_tag "Find Chefs", :name => nil, class: "btn btn-default zipsearch"  %>
+
+<% end %>
+
   </div>
 <% else %>
   <% flash[:danger] = "Please log in." %>

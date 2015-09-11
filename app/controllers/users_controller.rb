@@ -1,12 +1,37 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
   before_action :correct_user,   only: [:edit, :update]
-  before_action :admin_user,     only: :destroy
+  before_action :admin_user,     only: [:destroy, :activationStatus, :chefStatus]
   # GET /users
   # GET /users.json
+  #def index
+ #   @users = User.where(admin: false).paginate(page: params[:page], :per_page => 15)
+#  end
+  
   def index
-    @users = User.where(admin: false).paginate(page: params[:page], :per_page => 15)
+    if current_user.admin?
+      @users = User.where(admin: false).paginate(page: params[:page], :per_page => 15)
+    else
+      @users = nearyou(params[:zip])
+    end
   end
+
+  def nearyou (zip)
+
+    @chefs = Array.new
+    address = Geokit::Geocoders::GoogleGeocoder.geocode "#{zip}"
+    @users = User.where(chef: true)
+    @users.each do |user|
+      if user.chef?
+        destination = Geokit::Geocoders::GoogleGeocoder.geocode "#{user.zipcode}"
+        if (destination.distance_to(address) < 10)
+          @chefs.push(user)
+        end
+      end
+    end
+    return @chefs
+  end
+
 
   # GET /users/1
   # GET /users/1.json
@@ -29,6 +54,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      #@user.store_location
       @user.send_activation_email
       flash[:success] = "Please check your email to activate your account."
       redirect_to root_url
@@ -42,6 +68,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
+      #@user.store_location
       flash[:success] = "Profile updated"
       redirect_to @user
     else
@@ -96,7 +123,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar, :remove_avatar)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar, :remove_avatar, :zipcode)
     end
     def logged_in_user
       unless logged_in?
