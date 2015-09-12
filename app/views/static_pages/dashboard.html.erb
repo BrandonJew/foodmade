@@ -4,7 +4,7 @@
 
 <% if logged_in? %>
   <div class ="well gray" >
-  <p> Hello <%= current_user.name %></p>
+  <p> Hello <%= current_user.name %>! Welcome to our beta site!</p>
 
 <%= form_tag users_path, :method => 'get', :class => "navbar-form" do %>
     <%= text_field_tag :zip, params[:search], :class => "form-control", :value => "#{current_user.zipcode}" %>

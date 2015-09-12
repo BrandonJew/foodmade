@@ -3,9 +3,9 @@
 <li>
   <%= image_tag user.avatar(:thumb) %>
   <%= link_to user.name, user %>
-
+  | <%= user.zipcode %>
   <% if user.chef? %>
-    <mark>CHEF</mark>
+    <mark>CHEF</mark> <%= user.food %>
   <% end %>
 </li>
 <% end %>

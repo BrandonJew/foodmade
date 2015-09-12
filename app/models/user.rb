@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   VALID_ZIPCODE_REGEX = /(^\d{5}$)|(^\d{5}-\d{4}$)/
   validates :zipcode, presence: true, length: { maximum: 10 },
 		    format: { with: VALID_ZIPCODE_REGEX }
+  validates :food, length: {maximum: 255}
   acts_as_mappable :default_units => :miles,
                    :default_formula => :sphere,
                    :distance_field_name => :distance,

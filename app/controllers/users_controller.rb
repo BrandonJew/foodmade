@@ -123,7 +123,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar, :remove_avatar, :zipcode)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar, :remove_avatar, :zipcode, :food)
     end
     def logged_in_user
       unless logged_in?

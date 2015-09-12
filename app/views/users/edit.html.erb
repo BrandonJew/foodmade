@@ -13,7 +13,11 @@
       <%= f.text_field :name, class: 'form-control' %>
 
       <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
+      <%= f.email_field :email, class: 'form-control' %> 
+      <% if current_user.chef? %>
+        <%= f.label :Type_of_food %>
+        <%= f.text_field :food, class: 'form-control' %>
+      <% end %>
       <%= f.label :zipcode %>
       <%= f.text_field :zipcode, class: 'form-control' %>
       <%= f.label :avatar %>
