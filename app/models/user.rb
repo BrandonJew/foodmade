@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   validates :zipcode, presence: true, length: { maximum: 10 },
 		    format: { with: VALID_ZIPCODE_REGEX }
   validates :food, length: {maximum: 255}
+  serialize :messages,Array
   acts_as_mappable :default_units => :miles,
                    :default_formula => :sphere,
                    :distance_field_name => :distance,

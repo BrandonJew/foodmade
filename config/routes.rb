@@ -24,10 +24,17 @@ Rails.application.routes.draw do
       put 'chefStatus'
       get 'activationStatus'
       put 'activationStatus'
+      get 'sendmessage'
+      put 'sendmessage'
+      get 'chefrequest'
+      put 'chefrequest'
     end
   end
 match "users/:id/chefStatus" => "users#chefStatus", :via => [:get], :as => 'users_chefStatus'
 match "users/:id/activationStatus" => "users#activationStatus", :via => [:get], :as => 'users_activationStatus'
+
+match "users/sendmessage" => "users#sendmessage", :via => [:get]
+match "chefrequest" => "users#chefrequest", :via => [:get]
 
 
   # The priority is based upon order of creation: first created -> highest priority.

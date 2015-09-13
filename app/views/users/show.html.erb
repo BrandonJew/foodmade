@@ -10,6 +10,20 @@
 	
 	<%= @user.name %>
 	</h3>
+</center>
+<% if @user.chef? %>
+<h2> Menu </h2>
+<%= simple_format(@user.menu) %>
+<% end %>
+	<% if logged_in? %>
+<center>
+<%= form_tag({controller: "users", action: "sendmessage"}, method: "get") do %>
+    <%= label_tag(:content, "Send message:") %> 
+    <%= text_area_tag(:content)  %>
+    <%= submit_tag("Send") %>
+<% end %>
+
+<% end %>
 <p> Profiles are under development. Here, people will be able to see your preferences, reviews, and much more!</p>
    </center>
 

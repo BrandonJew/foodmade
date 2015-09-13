@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150912213345) do
+ActiveRecord::Schema.define(version: 20150913003905) do
 
   create_table "recipients", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -26,17 +26,17 @@ ActiveRecord::Schema.define(version: 20150912213345) do
   create_table "users", force: :cascade do |t|
     t.string   "name",                limit: 255
     t.string   "email",               limit: 255
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
     t.string   "password_digest",     limit: 255
     t.string   "remember_digest",     limit: 255
-    t.boolean  "admin",                           default: false
+    t.boolean  "admin",                             default: false
     t.string   "activation_digest",   limit: 255
-    t.boolean  "activated",                       default: false
+    t.boolean  "activated",                         default: false
     t.datetime "activated_at"
     t.string   "reset_digest",        limit: 255
     t.datetime "reset_sent_at"
-    t.boolean  "chef",                            default: false
+    t.boolean  "chef",                              default: false
     t.string   "avatar_file_name",    limit: 255
     t.string   "avatar_content_type", limit: 255
     t.integer  "avatar_file_size",    limit: 4
@@ -45,6 +45,9 @@ ActiveRecord::Schema.define(version: 20150912213345) do
     t.float    "lat",                 limit: 24
     t.float    "lng",                 limit: 24
     t.string   "food",                limit: 255
+    t.text     "messages",            limit: 65535
+    t.text     "menu",                limit: 65535
+    t.boolean  "request",                           default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

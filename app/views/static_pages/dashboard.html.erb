@@ -4,12 +4,26 @@
 
 <% if logged_in? %>
   <div class ="well gray" >
-  <p> Hello <%= current_user.name %>! Welcome to our beta site!</p>
-
+  <p> Hello <%= current_user.name %>! Welcome to our beta site! This is an extremely basic working form of the site for users to test while we develop a streamlined platform for FoodMade!</p>
 <%= form_tag users_path, :method => 'get', :class => "navbar-form" do %>
     <%= text_field_tag :zip, params[:search], :class => "form-control", :value => "#{current_user.zipcode}" %>
     <%= submit_tag "Find Chefs", :name => nil, class: "btn btn-default zipsearch"  %>
 
+<% end %>
+  <strong><p> Here are your messages: </p></strong>
+<% n = 0 %>
+<% current_user.messages.reverse.each do |m| %>  
+</p>  <%= simple_format(m) %> </p>
+___________________________________
+<% n += 1 %>
+<% end %>
+<% if !current_user.chef? %>
+<%= form_tag({controller: "users", action: "chefrequest"}, method: "get") do %>
+    <%= label_tag(:content, "Request to be a chef!:") %>
+    <p>Please specify your full name, location, and what you wish to cook. Thank you. </p>
+    <%= text_area_tag(:content)  %>
+    <%= submit_tag("Send") %>
+<% end %>
 <% end %>
 
   </div>

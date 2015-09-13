@@ -15,6 +15,38 @@ class UsersController < ApplicationController
       @users = nearyou(params[:zip])
     end
   end
+  
+  def chefrequest
+    sendchefrequest(params[:content])
+  end
+
+  def sendchefrequest (content)
+    current_user.update_attribute(:request,    true)
+    user = User.first
+    time = Time.new
+    datestamp = time.strftime("%Y-%m-%d %l:%M %P")
+    message = ("Sent from #{current_user.name} (#{current_user.email} | ID: #{current_user.id}) at #{datestamp}: \n" + "\n" + content) 
+    user.messages.push(message)
+    user.save
+  end
+
+  def sendmessage
+      user = User.find(params[:id])
+      messagesender(params[:content], user)
+  end
+
+
+ def messagesender (content, user)
+    time = Time.new
+    datestamp = time.strftime("%Y-%m-%d %l:%M %P")
+    if !current_user.chef?
+    message = ("Sent from #{current_user.name} (#{current_user.email}) at #{datestamp}: \n" + "\n" + content + "\n" + "\n Profile: foodmade.co/users/#{current_user.id}")
+    else
+    message = ("Sent from #{current_user.name} (Chef) at #{datestamp}: \n" + "\n" + content + "\n" + "\n Profile: foodmade.co/users/#{current_user.id}")
+    end 
+    user.messages.push(message)
+    user.save
+  end
 
   def nearyou (zip)
 
@@ -24,13 +56,14 @@ class UsersController < ApplicationController
     @users.each do |user|
       if user.chef?
         destination = Geokit::Geocoders::GoogleGeocoder.geocode "#{user.zipcode}"
-        if (destination.distance_to(address) < 10)
+        if (destination.distance_to(address) < 30)
           @chefs.push(user)
         end
       end
     end
     return @chefs
   end
+
 
 
   # GET /users/1
@@ -48,6 +81,7 @@ class UsersController < ApplicationController
   def edit
 	@user = User.find(params[:id])
   end
+ 
 
   # POST /users
   # POST /users.json
@@ -92,7 +126,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if !@user.chef?
       @user.update_attribute(:chef,    true)
+      @user.update_attribute(:request, false)
       flash[:success] = "#{@user.name} is now a chef! Notification email has been sent to #{@user.email}!" 
+      @user.messages.push("From the FoodMade Team: \n
+      \n You are now a chef! Be sure to update your profile information with what you will cook!")
+      @user.save
       UserMailer.chef_confirmation(@user).deliver_now
       redirect_to "/users?approved=true"
     else 
@@ -123,7 +161,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar, :remove_avatar, :zipcode, :food)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar, :remove_avatar, :zipcode, :food, :messages, :menu, :request)
     end
     def logged_in_user
       unless logged_in?

@@ -1,7 +1,7 @@
 
 <% provide(:title, 'Update Profile') %>
 
-<div class = "well gray signupcenter">
+<div class = "well gray ">
 <h1><center><strong>Update Profile</strong></center></h1>
 <center><%= image_tag @user.avatar (:thumb) %></center>
 <div class="row">
@@ -17,6 +17,8 @@
       <% if current_user.chef? %>
         <%= f.label :Type_of_food %>
         <%= f.text_field :food, class: 'form-control' %>
+        <%= f.label :Menu %> (List items, prices, and any other information about your offered dining experience)
+        <%= f.text_area :menu, class: 'form-control' %> 
       <% end %>
       <%= f.label :zipcode %>
       <%= f.text_field :zipcode, class: 'form-control' %>

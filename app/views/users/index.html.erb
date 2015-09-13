@@ -2,7 +2,7 @@
 
 <div class = "well gray" >
 
-<h1>Chefs nearby</h1>
+<h1>Chefs nearby</h1> (50 mile radius)
 
 
 <ul class="users">
@@ -20,7 +20,10 @@
           <tr>
             <td>
               <%= image_tag user.avatar(:thumb) %>
-              <%= link_to user.name, user %>
+              <%= link_to user.name, user %> <%= user.id %>
+	      <% if user.request? %>
+                <strong><mark>REQUEST TO BE CHEF</mark></strong>
+              <% end %>
               <% if !user.activated? %>
                 <strong><mark>NOT ACTIVATED</mark></strong>
               <% end %>
