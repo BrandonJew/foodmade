@@ -11,7 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150913003905) do
+ActiveRecord::Schema.define(version: 20150918125700) do
+
+  create_table "items", force: :cascade do |t|
+    t.string   "name",                limit: 255
+    t.text     "description",         limit: 65535
+    t.decimal  "price",                             precision: 5, scale: 3
+    t.datetime "created_at",                                                null: false
+    t.datetime "updated_at",                                                null: false
+    t.string   "avatar_file_name",    limit: 255
+    t.string   "avatar_content_type", limit: 255
+    t.integer  "avatar_file_size",    limit: 4
+    t.datetime "avatar_updated_at"
+    t.integer  "user_id",             limit: 4
+  end
+
+  create_table "meetings", force: :cascade do |t|
+    t.string   "time",       limit: 255
+    t.boolean  "reserved"
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "duration",   limit: 4
+  end
 
   create_table "recipients", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -22,6 +44,24 @@ ActiveRecord::Schema.define(version: 20150913003905) do
   end
 
   add_index "recipients", ["email"], name: "index_recipients_on_email", unique: true, using: :btree
+
+  create_table "reservations", force: :cascade do |t|
+    t.integer  "user_id",             limit: 4
+    t.string   "time",                limit: 255
+    t.text     "order",               limit: 65535
+    t.decimal  "price",                             precision: 10
+    t.boolean  "confimation"
+    t.datetime "created_at",                                                       null: false
+    t.datetime "updated_at",                                                       null: false
+    t.boolean  "sent"
+    t.text     "notification_params", limit: 65535
+    t.string   "status",              limit: 255
+    t.string   "transaction_id",      limit: 255
+    t.datetime "purchased_at"
+    t.boolean  "paid",                                             default: false
+    t.integer  "sender_id",           limit: 4
+    t.integer  "receiver_id",         limit: 4
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name",                limit: 255

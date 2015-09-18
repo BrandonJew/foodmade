@@ -1,6 +1,8 @@
 $navbar-default-bg: rgba(144,238,144,1.0);
+// import bootstrap-sprockets before bootstrap if using bootstrap >= 3.2
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "bootstrap-datetimepicker";
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;

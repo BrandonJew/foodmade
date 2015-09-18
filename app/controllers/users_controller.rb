@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   end
 
   def sendchefrequest (content)
-    current_user.update_attribute(:request,    true)
+    current_user.update_attributes(request: true, chef: true)
     user = User.first
     time = Time.new
     datestamp = time.strftime("%Y-%m-%d %l:%M %P")
@@ -70,6 +70,9 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
+    @items = Item.where(user_id: @user.id) 
+    @meetings = Meeting.where(user_id: @user.id)
+    @reservation = Reservation.create
   end
 
   # GET /users/new
@@ -80,6 +83,8 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
 	@user = User.find(params[:id])
+        @item = Item.create
+        @meeting = Meeting.create
   end
  
 

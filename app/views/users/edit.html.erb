@@ -2,6 +2,57 @@
 <% provide(:title, 'Update Profile') %>
 
 <div class = "well gray ">
+<% if current_user.chef? %>
+<h1><center><strong>Update Schedule</strong></center></h1>
+
+
+    <div class="row">
+        <div class='col-md-6 col-md-offset-3'>
+ <%= form_for(@meeting) do |f| %>
+            <%= f.label :time %>
+            <%= f.text_field :time, class: 'form-control', id: 'datetimepicker4' %>
+        
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker4').datetimepicker();
+            });
+        </script>
+<%= f.label :duration %> (in Minutes)
+<%= f.number_field :duration, :class => 'form-control', :step => 'any', :value => "30" %>
+<%= f.hidden_field :user_id, :value => @user.id %>
+	<br>
+      <%= f.submit "Add time!", class: "btn btn-warning" %>
+    <% end %>
+    </div>
+</div>
+
+
+<h1><center><strong>Update Menu</strong></center></h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@item) do |f| %>
+      <%= render 'shared/error_messages' %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+
+      <%= f.label :description %>
+      <%= f.text_area :description, class: 'form-control' %>
+
+      <%= f.label :price %>
+      <%= f.number_field :price, :class => 'text_field', :step => 0.01 %>
+
+      <%= f.label :picture %>
+      <%= f.file_field :avatar %>
+      <%= f.hidden_field :user_id, :value => @user.id %>
+
+	<br>
+      <%= f.submit "Add item!", class: "btn btn-warning" %>
+    <% end %>
+</div>
+</div>
+<% end %>
+<br>
 <h1><center><strong>Update Profile</strong></center></h1>
 <center><%= image_tag @user.avatar (:thumb) %></center>
 <div class="row">
@@ -17,9 +68,11 @@
       <% if current_user.chef? %>
         <%= f.label :Type_of_food %>
         <%= f.text_field :food, class: 'form-control' %>
-        <%= f.label :Menu %> (List items, prices, and any other information about your offered dining experience)
-        <%= f.text_area :menu, class: 'form-control' %> 
+        <!---<%= f.label :Menu %> (List items, prices, and any other information about your offered dining experience)
+        <%= f.text_area :menu, class: 'form-control' %> --->
+
       <% end %>
+
       <%= f.label :zipcode %>
       <%= f.text_field :zipcode, class: 'form-control' %>
       <%= f.label :avatar %>

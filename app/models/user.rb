@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  has_many :reservations, dependent: :destroy
+  has_many :items, dependent: :destroy
+  has_many :meetings, dependent: :destroy
   attr_accessor :remember_token, :activation_token, :reset_token, :remove_avatar
   before_save   :downcase_email, :delete_avatar, if: ->{ remove_avatar == '1' && !avatar_updated_at_changed? }
   before_create :create_activation_digest

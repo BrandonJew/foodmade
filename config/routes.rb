@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'reservations/new'
+
   get 'password_resets/new'
 
   get 'password_resets/edit'
@@ -14,8 +16,37 @@ Rails.application.routes.draw do
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
+  post "reservations/:id" => "reservations#hook"
+  post "hook" => "reservations#hook"
   resources :users
   resources :recipients
+  resources :reservations, only: [:create, :destroy, :edit]
+  resources :meetings, only: [:create, :destroy, :edit]
+  resources :meetings do
+    member do
+      get 'destroy'
+      put 'destroy'
+    end
+  end
+  match "meetings/:id/destroy" => "meetings#destroy", :via => [:get], :as => 'meetings_destroy'
+  resources :items, only: [:create, :destroy, :edit]
+  resources :items do
+    member do
+      get 'destroy'
+      put 'destroy'
+    end
+  end
+  match "items/:id/destroy" => "items#destroy", :via => [:get], :as => 'items_destroy'
+  resources :reservations do
+    member do
+      get 'confirm_reservation'
+      put 'confirm_reservation'
+      get 'deny_reservation'
+      put 'deny_reservation'
+    end
+  end
+  match "reservations/:id/confirm_reservation" => "reservations#confirm_reservation", :via => [:get], :as => 'reservations_confirm_reservation'
+  match "reservations/:id/deny_reservation" => "reservations#deny_reservation", :via => [:get], :as => 'reservations_deny_reservation'
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :users do

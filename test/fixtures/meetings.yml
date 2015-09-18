@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  time: 2015-09-18 02:28:36
+  reserved: false
+  user_id: 1
+
+two:
+  time: 2015-09-18 02:28:36
+  reserved: false
+  user_id: 1

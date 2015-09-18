@@ -1,4 +1,36 @@
+  <script>
+function Total(qty,ud,total,value){
+ qty=document.getElementById(qty);
+ ud>0?qty.value++:qty.value--;
+ if (ud>0) {
+    tot.value=parseFloat(tot.value)+parseFloat(value);
+ } else if (qty.value >= 0) {
+ tot.value=parseFloat(tot.value)-parseFloat(value);
+ }
+ tot.value = toFixed(tot.value, 2);
+ qty.value=Math.max(qty.value,0);
+ document.getElementById(total).value=qty.value*value;
+ 
+}
 
+function toFixed(value, precision) {
+    var precision = precision || 0,
+        power = Math.pow(10, precision),
+        absValue = Math.abs(Math.round(value * power)),
+        result = (value < 0 ? '-' : '') + String(Math.floor(absValue / power));
+
+    if (precision > 0) {
+        var fraction = String(absValue % power),
+            padding = new Array(Math.max(precision - fraction.length, 0) + 1).join('0');
+        result += '.' + padding + fraction;
+    }
+    return result;
+}
+
+
+
+  </script>
+   
 <div class = "well gray">
 <% provide(:title, @user.name) %>
 
@@ -13,15 +45,97 @@
 </center>
 <% if @user.chef? %>
 <h2> Menu </h2>
-<%= simple_format(@user.menu) %>
+<div id="purhcaseForm">
+	 <form id="purchase">
+ <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Picture</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+<% @items.each do |item| %>
+ <tr>
+  <td>
+  <%= image_tag item.avatar(:thumb) %>
+  </td>
+  <td>
+  <%= item.name %>
+  </td>
+  <td>
+  <%= item.description %>
+   </td>
+  <td>
+  $<%= item.price %>
+  </td>
+  <td>
+ 
+ <div class="row">
+    <div class="col-sm-2" ><input type='button' name='subtract' onclick='Total("qty<%= item.id %>",-1,"total<%= item.id %>","<%= item.price %>");' value='-' class='btn btn-sm'/></div>
+    <div class="col-sm-2" ><input type='button' name='add' onclick='Total("qty<%= item.id %>",1,"total<%= item.id %>","<%= item.price %>");' value='+' class='btn btn-sm'/></div>
+    <div class="col-sm-2" >		 <input type='text' name='qty<%= item.id %>' id='qty<%= item.id %>' readonly=true value="0" class='well-sm' /></div>
+  </div>
+</td>
+<td>
+ <% if @user == current_user %>
+    <%= link_to "Delete", {:controller => "items", :id => item.id, :action => "destroy"}, {:method => :put, :existence => false,
+data: { confirm: "Delete #{item.name}?" }, class: "btn btn-sm btn-warning"} %>
+  <% end %>
+</td>
+</tr>
 <% end %>
-	<% if logged_in? %>
+</tbody>
+</table>
 <center>
-<%= form_tag({controller: "users", action: "sendmessage"}, method: "get") do %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+ Total Price (USD):
+
+</div>
+</div>
+</center>
+      </form>
+</div>
+<% end %>
+
+	<% if logged_in? %>
+<h2> Make a Reservation </h2>
+<center>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@reservation) do |f| %>
+      <%= render 'shared/error_messages' %>
+
+      <%= f.label :time %>
+      
+<%= f.collection_select :time, @meetings.all, :time, :description, {prompt: "Select a time"}, {class: "form-control"} %>
+      <%= f.label :order %>
+      <%= f.text_area :order, class: 'form-control' %>
+
+      <%= f.label :price %>
+      (USD)<%= f.number_field :price, :class => 'form-control', :step => 'any', :name =>'tot', :id => 'tot', :value => "0" %>
+
+      <%= f.hidden_field :user_id, :value => @user.id %>
+
+	<br>
+      <%= f.submit "Send Reservation!", class: "btn btn-warning" %>
+    <% end %>
+	
+	<br>
+  </div>
+</div>
+
+
+<br>
+<!---<%= form_tag({controller: "users", action: "sendmessage"}, method: "get") do %>
     <%= label_tag(:content, "Send message:") %> 
     <%= text_area_tag(:content)  %>
     <%= submit_tag("Send") %>
-<% end %>
+<% end %> --->
 
 <% end %>
 <p> Profiles are under development. Here, people will be able to see your preferences, reviews, and much more!</p>
