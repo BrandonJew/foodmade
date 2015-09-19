@@ -108,16 +108,15 @@ data: { confirm: "Delete #{item.name}?" }, class: "btn btn-sm btn-warning"} %>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <%= form_for(@reservation) do |f| %>
-      <%= render 'shared/error_messages' %>
+      
 
       <%= f.label :time %>
-      
 <%= f.collection_select :time, @meetings.all, :time, :description, {prompt: "Select a time"}, {class: "form-control"} %>
       <%= f.label :order %>
       <%= f.text_area :order, class: 'form-control' %>
 
       <%= f.label :price %>
-      (USD)<%= f.number_field :price, :class => 'form-control', :step => 'any', :name =>'tot', :id => 'tot', :value => "0" %>
+      (USD)<%= f.number_field :price, :class => 'form-control', :step => 'any', :id => 'tot', :value => "0" %>
 
       <%= f.hidden_field :user_id, :value => @user.id %>
 

@@ -83,7 +83,6 @@ include PayPal::SDK::REST
   def create
     
     @reservation = Reservation.new(reservation_params)
-    recipient = User.find(@reservation.user_id)
     if @reservation.save
       redirect_to @reservation.paypal_url(reservation_path(@reservation))
     else

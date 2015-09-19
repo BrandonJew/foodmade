@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150918125700) do
+ActiveRecord::Schema.define(version: 20150919023305) do
 
   create_table "items", force: :cascade do |t|
     t.string   "name",                limit: 255
@@ -49,16 +49,16 @@ ActiveRecord::Schema.define(version: 20150918125700) do
     t.integer  "user_id",             limit: 4
     t.string   "time",                limit: 255
     t.text     "order",               limit: 65535
-    t.decimal  "price",                             precision: 10
+    t.decimal  "price",                             precision: 5, scale: 3
     t.boolean  "confimation"
-    t.datetime "created_at",                                                       null: false
-    t.datetime "updated_at",                                                       null: false
+    t.datetime "created_at",                                                                null: false
+    t.datetime "updated_at",                                                                null: false
     t.boolean  "sent"
     t.text     "notification_params", limit: 65535
     t.string   "status",              limit: 255
     t.string   "transaction_id",      limit: 255
     t.datetime "purchased_at"
-    t.boolean  "paid",                                             default: false
+    t.boolean  "paid",                                                      default: false
     t.integer  "sender_id",           limit: 4
     t.integer  "receiver_id",         limit: 4
   end
