@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
-  post "reservations/:id" => "reservations#hook"
+  post "reservations/:id" => "reservations#show"
   post "hook" => "reservations#hook"
   resources :users
   resources :recipients
